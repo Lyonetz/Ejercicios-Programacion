@@ -15,15 +15,13 @@ public class Strings {
         do {
             System.out.println("Introduzca un nuevo String (asdf para parar): ");
             s = br.readLine();
-            if(s.equalsIgnoreCase("asdf")) {
+            if(s.equalsIgnoreCase("asdf"))
                 check = true;
-            } else {
+            else
                 arrayList.add(s);
-            }
         }while(!check);
 
-        for(String e : arrayList){
+        for(String e : arrayList)
             System.out.println("- " + e);
-        }
     }
 }
