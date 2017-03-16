@@ -22,7 +22,7 @@ public class Strings {
                 arrayList.add(s);
         }while(!check);
 
-        Collections.sort(arrayList);
+        arrayList.sort(null);
 
         for(String e : arrayList)
             System.out.println("- " + e);
