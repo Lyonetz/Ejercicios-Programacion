@@ -23,7 +23,7 @@ public class Strings {
         }while(!check);
 
         for(String e : arrayList){
-            System.out.println(e);
+            System.out.println("- " + e);
         }
     }
 }
