@@ -23,6 +23,7 @@ public class Strings {
 
         arrayList.sort(null);
 
+        //System.out.println(arrayList);
         for(String e : arrayList)
             System.out.println("- " + e);
     }
