@@ -22,8 +22,8 @@ public class InsertionSort {
 
         vect = insertionSort(vect);
 
-        for (int i = 0; i < vect.length; i++) {
-            System.out.println(vect[i]);
+        for (int a : vect) {
+            System.out.println(a);
         }
     }
 }
