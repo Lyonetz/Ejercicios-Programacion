@@ -22,7 +22,7 @@ public class SelectionSort {
         return A;
     }
     public static void main(String[] args) {
-        int vect[] = {2,9,7,1};
+        int vect[] = {1,3,8,5,4,10};
 
         vect = selectionSort(vect);
 
