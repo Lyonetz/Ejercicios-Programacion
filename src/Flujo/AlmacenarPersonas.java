@@ -31,7 +31,6 @@ public class AlmacenarPersonas {
                             break;
                     }
                 }
-
                 personas.add(p);
 
                 linea = br.readLine();
@@ -45,6 +44,9 @@ public class AlmacenarPersonas {
 
         for(Persona per: personas) {
             System.out.println(per.getNombre());
+            System.out.println(per.getApellidos());
+            System.out.println(per.getTelefono());
+            System.out.println();
         }
     }
 }
