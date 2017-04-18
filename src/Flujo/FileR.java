@@ -12,8 +12,8 @@ public class FileR {
             String linea = br.readLine();
 
             while(linea != null) {
-                linea = br.readLine();
                 System.out.println(linea);
+                linea = br.readLine();
             }
             br.close();
         } catch(FileNotFoundException fnfe) {
