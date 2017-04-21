@@ -16,18 +16,18 @@ public class AlmacenarPersonas {
 
             while(linea != null) {
                 Persona p = new Persona();
-                String[] res = linea.split(";");
+                String[] campos = linea.split(";");
 
-                for (int i = 0; i < res.length; i++) {
+                for (int i = 0; i < campos.length; i++) {
                     switch (i) {
                         case 0:
-                            p.setNombre(res[i]);
+                            p.setNombre(campos[i]);
                             break;
                         case 1:
-                            p.setApellidos(res[i]);
+                            p.setApellidos(campos[i]);
                             break;
                         case 2:
-                            p.setTelefono(res[i]);
+                            p.setTelefono(campos[i]);
                             break;
                     }
                 }
