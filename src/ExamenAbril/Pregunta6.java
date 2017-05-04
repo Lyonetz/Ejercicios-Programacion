@@ -1,7 +1,5 @@
 package ExamenAbril;
 
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
-
 class Paquete {
     class Contenido {
         int valor;

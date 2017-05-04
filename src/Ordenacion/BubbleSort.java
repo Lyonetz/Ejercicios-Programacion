@@ -25,4 +25,5 @@ public class BubbleSort {
             System.out.println(vect[i]);
         }
     }
+
 }
