@@ -37,8 +37,5 @@ public class EscribirPersonas {
                 e.printStackTrace();
             }
         }
-
-
-
     }
 }
