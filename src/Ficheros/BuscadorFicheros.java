@@ -20,7 +20,7 @@ public class BuscadorFicheros {
         if(!existe) {
             for(int j = 0; j < ficheros.length; j++){
                 if(ficheros[j].isDirectory()) {
-                    System.out.println("El archivo no está en la carpeta " + ficheros[j].getName());
+                    System.out.println("El archivo no está en la subcarpeta " + ficheros[j].getName());
                     /*buscador(file, ruta + "/" + ficheros[j].getName());*/
                     buscador(file, ficheros[j].getAbsolutePath());
                 }
