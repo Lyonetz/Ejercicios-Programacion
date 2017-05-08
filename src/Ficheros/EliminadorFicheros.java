@@ -1,12 +1,14 @@
 package Ficheros;
 
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class BuscadorFicheros {
-    public static void buscador(File file, String ruta) {
+public class EliminadorFicheros {
+    public static void eliminador(File file) throws IOException {
         File directorio = new File(ruta);
 
         File[] ficheros = directorio.listFiles();
@@ -22,7 +24,7 @@ public class BuscadorFicheros {
                 if(ficheros[j].isDirectory()) {
                     System.out.println("El archivo no está en la subcarpeta " + ficheros[j].getName());
                     /*buscador(file, ruta + "/" + ficheros[j].getName());*/
-                    buscador(file, ficheros[j].getAbsolutePath());
+                    eliminador(file, ficheros[j].getAbsolutePath());
                 }
             }
         } else {
@@ -36,11 +38,11 @@ public class BuscadorFicheros {
     }
 
     public static void main(String[] args) throws IOException {
-        System.out.println("Introduzca nombre del archivo a buscar (incluida la extension)");
+        System.out.println("Introduzca nombre del archivo a borrar (incluida la extension)");
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String nombre = br.readLine();
 
         File f = new File("/home/carlos/Documents/Prueba Ficheros Java/" + nombre);
-        buscador(f,"/home/carlos/Documents/Prueba Ficheros Java");
+        eliminador(f);
     }
 }
