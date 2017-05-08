@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class EliminadorFicheros {
-    public static void eliminador(File file) throws IOException {
+    public static void eliminador(File file, String ruta) throws IOException {
         File directorio = new File(ruta);
 
         File[] ficheros = directorio.listFiles();
@@ -21,19 +21,20 @@ public class EliminadorFicheros {
 
         if(!existe) {
             for(int j = 0; j < ficheros.length; j++){
-                if(ficheros[j].isDirectory()) {
-                    System.out.println("El archivo no está en la subcarpeta " + ficheros[j].getName());
-                    /*buscador(file, ruta + "/" + ficheros[j].getName());*/
+                if(ficheros[j].isDirectory())
                     eliminador(file, ficheros[j].getAbsolutePath());
-                }
             }
         } else {
             File f = new File(ruta + "/" + file.getName());
 
-            System.out.println("¡Archivo encontrado!");
-            System.out.println("INFORMACIÓN DEL FICHERO");
-            System.out.println(ruta + "/" + file.getName());
-            System.out.println(f.length() + " Bytes");
+            if(f.isDirectory()) {
+                for(int k = 0; k < ficheros.length; k++){
+                    eliminador(ficheros[k],ficheros[k].getAbsolutePath());
+                }
+
+            } else {
+                f.delete();
+            }
         }
     }
 
@@ -43,6 +44,6 @@ public class EliminadorFicheros {
         String nombre = br.readLine();
 
         File f = new File("/home/carlos/Documents/Prueba Ficheros Java/" + nombre);
-        eliminador(f);
+        eliminador(f, "/home/carlos/Documents/Prueba Ficheros Java/");
     }
 }
