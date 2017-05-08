@@ -1,20 +1,37 @@
 package Ficheros;
 
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class EliminadorFicheros {
+
+    public static void eliminadorSubcarpetas(String ruta) {
+        File subdirectorio = new File(ruta);
+
+        if(subdirectorio.isDirectory()) {
+            File[] subficheros = subdirectorio.listFiles();
+
+            for (int i = 0; i < subficheros.length; i++) {
+                if (subdirectorio.isFile()) {
+                    File temp = new File(ruta + " " + subficheros[i].getName());
+                    temp.delete();
+                } else {
+                    eliminadorSubcarpetas(subficheros[i].getAbsolutePath());
+                }
+            }
+        }
+        subdirectorio.delete();
+    }
+
     public static void eliminador(File file, String ruta) throws IOException {
         File directorio = new File(ruta);
 
         File[] ficheros = directorio.listFiles();
         boolean existe = false;
 
-        for(int i = 0; i< ficheros.length; i++) {
+        for(int i = 0; i < ficheros.length; i++) {
             if(ficheros[i].getName().equals(file.getName()))
                 existe = true;
         }
@@ -29,7 +46,7 @@ public class EliminadorFicheros {
 
             if(f.isDirectory()) {
                 for(int k = 0; k < ficheros.length; k++){
-                    eliminador(ficheros[k],ficheros[k].getAbsolutePath());
+                    eliminadorSubcarpetas(ficheros[k].getAbsolutePath());
                 }
 
             } else {
