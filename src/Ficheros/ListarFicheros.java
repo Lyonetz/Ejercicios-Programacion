@@ -9,6 +9,8 @@ import java.io.InputStreamReader;
 * directorio en Kb (la suma total de los directorios que forman el directorio) */
 
 public class ListarFicheros {
+    static long tamTotal = 0;
+
     public static void listadorSubficheros(String ruta) {
         File subdirectorio = new File(ruta);
 
@@ -17,15 +19,18 @@ public class ListarFicheros {
 
             for(int i = 0; i < subficheros.length; i++) {
                 if(subficheros[i].isFile()) {
-                    System.out.println("\t--> Archivo '" + subficheros[i].getName() + "'");
-                    System.out.println("\tTamaño: " + subficheros[i].length() + " Bytes");
-                    System.out.println("\tOrigen: " + subdirectorio.getName());
+                    System.out.println("--> Archivo '" + subficheros[i].getName() + "'");
+                    System.out.println("Tamaño: " + subficheros[i].length() + " Bytes");
+                    System.out.println("Carpeta de origen: " + subdirectorio.getName());
                     System.out.println();
+                    tamTotal += subficheros[i].length();
                 } else {
-                    System.out.println("\t--> Carpeta '" + subficheros[i].getName() + "'");
-                    System.out.println("\tTamaño: " + subficheros[i].length() + " Bytes");
-                    System.out.println("\tOrigen: " + subdirectorio.getName());
+                    System.out.println("--> Carpeta '" + subficheros[i].getName() + "'");
+                    System.out.println("Tamaño: " + subficheros[i].length() + " Bytes");
+                    System.out.println("Carpeta de origen: " + subdirectorio.getName());
                     System.out.println();
+                    tamTotal += subficheros[i].length();
+                    listadorSubficheros(subficheros[i].getAbsolutePath());
                 }
             }
         }
@@ -57,12 +62,16 @@ public class ListarFicheros {
                 if(subsubfichero[k].isDirectory()) {
                     System.out.println("-->Carpeta '" + subsubfichero[k].getName() + "'");
                     System.out.println("Tamaño: " + subsubfichero[k].length() + " Bytes");
+                    System.out.println("Carpeta de origen: " + file.getName());
                     System.out.println();
+                    tamTotal += subsubfichero[k].length();
                     listadorSubficheros(subsubfichero[k].getAbsolutePath());
                 } else {
                     System.out.println("-->Archivo '" + subsubfichero[k].getName() + "'");
                     System.out.println("Tamaño: " + subsubfichero[k].length() + " Bytes");
+                    System.out.println("Carpeta de origen: " + file.getName());
                     System.out.println();
+                    tamTotal += subsubfichero[k].length();
                 }
             }
         }
@@ -77,6 +86,8 @@ public class ListarFicheros {
         String nombreFichero = br2.readLine();
 
         File f = new File(rutaFichero + nombreFichero);
+        System.out.println("FICHEROS CONTENIDOS EN LA CARPETA '" + f.getName()  + " '");
         listador(f, rutaFichero);
+        System.out.println("TAMAÑO TOTAL: " + tamTotal + " Bytes");
     }
 }
