@@ -9,11 +9,11 @@ public class EliminadorFicheros {
     public static void eliminadorSubcarpetas(String ruta) {
         File subdirectorio = new File(ruta);
 
-        if(subdirectorio.isDirectory()) {
+        if (subdirectorio.isDirectory()) {
             File[] subficheros = subdirectorio.listFiles();
 
-            for(int i = 0; i < subficheros.length; i++) {
-                if(subdirectorio.isFile()) {
+            for (int i = 0; i < subficheros.length; i++) {
+                if (subdirectorio.isFile()) {
                     File temp = new File(ruta + " " + subficheros[i].getName());
                     temp.delete();
                 } else {
@@ -30,27 +30,28 @@ public class EliminadorFicheros {
         File[] ficheros = raiz.listFiles();
         boolean existe = false;
 
-        for(int i = 0; i < ficheros.length; i++) {
-            if(ficheros[i].getName().equals(file.getName()))
+        for (int i = 0; i < ficheros.length; i++) {
+            if (ficheros[i].getName().equals(file.getName()))
                 existe = true;
         }
 
-        if(!existe) {
-            for(int j = 0; j < ficheros.length; j++){
-                if(ficheros[j].isDirectory())
+        if (!existe) {
+            for (int j = 0; j < ficheros.length; j++) {
+                if (ficheros[j].isDirectory())
                     eliminador(file, ficheros[j].getAbsolutePath());
             }
         } else {
             File f = new File(ruta + "/" + file.getName());
 
-            File[] subficheros = f.listFiles();
+            if (f.isDirectory()) {
+                File[] subficheros = f.listFiles();
 
-            for(int i = 0; i < subficheros.length; i++){
-
-                if(subficheros[i].isDirectory())
-                    eliminadorSubcarpetas(subficheros[i].getAbsolutePath());
-                else
-                    subficheros[i].delete();
+                for (int i = 0; i < subficheros.length; i++) {
+                    if (subficheros[i].isDirectory())
+                        eliminadorSubcarpetas(subficheros[i].getAbsolutePath());
+                    else
+                        subficheros[i].delete();
+                }
             }
             f.delete();
         }
