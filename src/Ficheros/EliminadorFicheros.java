@@ -44,14 +44,17 @@ public class EliminadorFicheros {
         } else {
             File f = new File(ruta + "/" + file.getName());
 
-            if(f.isDirectory()) {
-                for(int k = 0; k < ficheros.length; k++){
-                    eliminadorSubcarpetas(ficheros[k].getAbsolutePath());
-                }
+            File[] subficheros = f.listFiles();
 
-            } else {
-                f.delete();
+            for(int i = 0; i < subficheros.length; i++){
+
+                if(subficheros[i].isDirectory()) {
+                    eliminadorSubcarpetas(subficheros[i].getAbsolutePath());
+                } else {
+                    subficheros[i].delete();
+                }
             }
+            f.delete();
         }
     }
 
