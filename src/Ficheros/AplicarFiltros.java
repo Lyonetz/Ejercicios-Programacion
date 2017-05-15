@@ -9,15 +9,16 @@ import java.util.Map;
 public class AplicarFiltros {
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-    public static void aplicarFiltro(String p1, String s1, String p2, String s2) throws IOException {
+    public static void aplicarFiltro(String[] f, String[] s) throws IOException {
 
         try {
-            BufferedReader brFile = new BufferedReader(new FileReader("/home/carlos/Desktop/sincensurar.txt"));
-            BufferedWriter bwFile = new BufferedWriter(new FileWriter("/home/carlos/Desktop/censurado.txt"));
+            BufferedReader brFile = new BufferedReader(new FileReader("C:\\Users\\Carlos\\Desktop\\prueba ficheros\\sincensurar.txt"));
+            BufferedWriter bwFile = new BufferedWriter(new FileWriter("C:\\Users\\Carlos\\Desktop\\prueba ficheros\\censurado.txt"));
 
             Map<String, String> ht = new HashMap();
-            ht.put(p1, s1);
-            ht.put(p2, s2);
+            for(int i = 0; i < f.length; i++) {
+                ht.put(f[i], s[i]);
+            }
 
             String linea;
 
@@ -42,17 +43,21 @@ public class AplicarFiltros {
     }
 
     public static void main(String[] args) throws IOException {
-        System.out.println("Introduzca la palabra 1: ");
-        String palabra1 = br.readLine();
-        System.out.println("Introduzca la palabra a sustituir palabra 1");
-        String sustituto1 = br.readLine();
+        System.out.println("Introduzca número de palabras a sustituir: ");
+        int num = Integer.parseInt(br.readLine());
+        String[] filtros = new String[num];
+        String[] sustitutos = new String[num];
 
-        System.out.println("Introduzca la palabra 2: ");
-        String palabra2 = br.readLine();
-        System.out.println("Introduzca la palabra a sustituir palabra 2");
-        String sustituto2 = br.readLine();
+        for(int i = 0; i < num; i++) {
+            System.out.println("Introduzca palabra " + (i+1) + ": ");
+            String f = br.readLine();
+            filtros[i] = f;
+            System.out.println("La palabra" + (i+1) + " se sustituirá por: ");
+            String s = br.readLine();
+            sustitutos[i] = s;
+        }
 
-        aplicarFiltro(palabra1,sustituto1,palabra2,sustituto2);
+        aplicarFiltro(filtros, sustitutos);
 
     }
 }
