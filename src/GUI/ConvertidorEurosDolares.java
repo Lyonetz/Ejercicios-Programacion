@@ -106,3 +106,4 @@ public class ConvertidorEurosDolares extends JPanel {
         convertidorEurosDolares.setVisible(true);
     }
 }
+ss
