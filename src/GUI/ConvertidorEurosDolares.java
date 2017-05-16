@@ -13,7 +13,7 @@ import java.awt.event.ActionListener;
 /**
  * @author unknown
  */
-public class ConvertidorEurosDolares extends JFrame {
+public class ConvertidorEurosDolares extends JPanel {
     public ConvertidorEurosDolares() {initComponents();}
 
     private void initComponents() {
@@ -26,13 +26,7 @@ public class ConvertidorEurosDolares extends JFrame {
         lDolares = new JLabel();
         tfDolares = new JTextField();
         btnDolaresEuros = new JButton();
-
-        btnEurosDolares.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                btnEurosDolaresActionPerformed(e);
-            }
-        });
+        btnReiniciar = new JButton();
 
         btnDolaresEuros.addActionListener(new ActionListener() {
             @Override
@@ -41,16 +35,28 @@ public class ConvertidorEurosDolares extends JFrame {
             }
         });
 
+        btnEurosDolares.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                btnEurosDolaresActionPerformed(e);
+            }
+        });
+
+        btnReiniciar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                btnReiniciarActionPerformed(e);
+            }
+        });
+
         //======== this ========
 
         // JFormDesigner evaluation mark
-        ConvertidorChecker.setBorder(new javax.swing.border.CompoundBorder(
-                new javax.swing.border.TitledBorder(new javax.swing.border.EmptyBorder(0, 0, 0, 0),
-                        "JFormDesigner Evaluation", javax.swing.border.TitledBorder.CENTER,
-                        javax.swing.border.TitledBorder.BOTTOM, new java.awt.Font("Dialog", java.awt.Font.BOLD, 12),
-                        java.awt.Color.red), ConvertidorChecker.getBorder())); ConvertidorChecker.addPropertyChangeListener(new java.beans.PropertyChangeListener(){public void propertyChange(java.beans.PropertyChangeEvent e){if("border".equals(e.getPropertyName()))throw new RuntimeException();}});
-
-        ConvertidorChecker.setLayout(null);
+        setBorder(new javax.swing.border.CompoundBorder(
+            new javax.swing.border.TitledBorder(new javax.swing.border.EmptyBorder(0, 0, 0, 0),
+                "JFormDesigner Evaluation", javax.swing.border.TitledBorder.CENTER,
+                javax.swing.border.TitledBorder.BOTTOM, new java.awt.Font("Dialog", java.awt.Font.BOLD, 12),
+                java.awt.Color.red), getBorder())); addPropertyChangeListener(new java.beans.PropertyChangeListener(){public void propertyChange(java.beans.PropertyChangeEvent e){if("border".equals(e.getPropertyName()))throw new RuntimeException();}});
 
         setLayout(new MigLayout(
             "hidemode 3",
@@ -58,7 +64,7 @@ public class ConvertidorEurosDolares extends JFrame {
             "[55,fill]" +
             "[80,fill]" +
             "[135,fill]" +
-            "[fill]",
+            "[0,fill]",
             // rows
             "[]" +
             "[]" +
@@ -71,7 +77,7 @@ public class ConvertidorEurosDolares extends JFrame {
 
         //---- btnEurosDolares ----
         btnEurosDolares.setText("Convertir a d\u00f3lares");
-        add(btnEurosDolares, "cell 2 0 2 1");
+        add(btnEurosDolares, "cell 2 0");
 
         //---- lDolares ----
         lDolares.setText("Dolares");
@@ -80,19 +86,24 @@ public class ConvertidorEurosDolares extends JFrame {
 
         //---- btnDolaresEuros ----
         btnDolaresEuros.setText("Convertir a euros");
-        add(btnDolaresEuros, "cell 2 1 2 1");
+        add(btnDolaresEuros, "cell 2 1");
+
+        //---- btnReiniciar ----
+        btnReiniciar.setText("Reiniciar");
+        add(btnReiniciar, "cell 2 2,align center baseline,grow 0 0");
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     // Generated using JFormDesigner Evaluation license - Carlos Javier LeÃ³n
-    private JPanel ConvertidorChecker;
     private JLabel lEuros;
     private JTextField tfEuros;
     private JButton btnEurosDolares;
     private JLabel lDolares;
     private JTextField tfDolares;
     private JButton btnDolaresEuros;
+    private JButton btnReiniciar;
+    private JPanel ConvertidorChecker;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
     public void btnEurosDolaresActionPerformed (ActionEvent event) {
@@ -109,6 +120,11 @@ public class ConvertidorEurosDolares extends JFrame {
 
         tfEuros.setText(String.valueOf(euros));
 
+    }
+
+    public void btnReiniciarActionPerformed(ActionEvent event) {
+        tfEuros.setText("");
+        tfDolares.setText("");
     }
 
     public static void main(String[] args) {
