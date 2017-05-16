@@ -13,14 +13,13 @@ import java.awt.event.ActionListener;
 /**
  * @author unknown
  */
-public class ConvertidorEurosDolares extends JPanel {
-    public ConvertidorEurosDolares() {
-        initComponents();
-    }
+public class ConvertidorEurosDolares extends JFrame {
+    public ConvertidorEurosDolares() {initComponents();}
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - Carlos Javier LeÃ³n
+        ConvertidorChecker = new JPanel();
         lEuros = new JLabel();
         tfEuros = new JTextField();
         btnEurosDolares = new JButton();
@@ -28,14 +27,30 @@ public class ConvertidorEurosDolares extends JPanel {
         tfDolares = new JTextField();
         btnDolaresEuros = new JButton();
 
+        btnEurosDolares.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                btnEurosDolaresActionPerformed(e);
+            }
+        });
+
+        btnDolaresEuros.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                btnDolaresEurosActionPerformed(e);
+            }
+        });
+
         //======== this ========
 
         // JFormDesigner evaluation mark
-        setBorder(new javax.swing.border.CompoundBorder(
-            new javax.swing.border.TitledBorder(new javax.swing.border.EmptyBorder(0, 0, 0, 0),
-                "JFormDesigner Evaluation", javax.swing.border.TitledBorder.CENTER,
-                javax.swing.border.TitledBorder.BOTTOM, new java.awt.Font("Dialog", java.awt.Font.BOLD, 12),
-                java.awt.Color.red), getBorder())); addPropertyChangeListener(new java.beans.PropertyChangeListener(){public void propertyChange(java.beans.PropertyChangeEvent e){if("border".equals(e.getPropertyName()))throw new RuntimeException();}});
+        ConvertidorChecker.setBorder(new javax.swing.border.CompoundBorder(
+                new javax.swing.border.TitledBorder(new javax.swing.border.EmptyBorder(0, 0, 0, 0),
+                        "JFormDesigner Evaluation", javax.swing.border.TitledBorder.CENTER,
+                        javax.swing.border.TitledBorder.BOTTOM, new java.awt.Font("Dialog", java.awt.Font.BOLD, 12),
+                        java.awt.Color.red), ConvertidorChecker.getBorder())); ConvertidorChecker.addPropertyChangeListener(new java.beans.PropertyChangeListener(){public void propertyChange(java.beans.PropertyChangeEvent e){if("border".equals(e.getPropertyName()))throw new RuntimeException();}});
+
+        ConvertidorChecker.setLayout(null);
 
         setLayout(new MigLayout(
             "hidemode 3",
@@ -71,6 +86,7 @@ public class ConvertidorEurosDolares extends JPanel {
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     // Generated using JFormDesigner Evaluation license - Carlos Javier LeÃ³n
+    private JPanel ConvertidorChecker;
     private JLabel lEuros;
     private JTextField tfEuros;
     private JButton btnEurosDolares;
@@ -79,30 +95,28 @@ public class ConvertidorEurosDolares extends JPanel {
     private JButton btnDolaresEuros;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
-    public void convertidor() {
-        btnEurosDolares.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                double euros = Double.parseDouble(tfEuros.getText());
-                double dolares = euros * 1.10135;
+    public void btnEurosDolaresActionPerformed (ActionEvent event) {
+        double euros = Double.parseDouble(tfEuros.getText());
+        double dolares = euros * 1.10135;
 
-                tfDolares.setText(String.valueOf(dolares));
-            }
-        });
+        tfDolares.setText(String.valueOf(dolares));
 
-        btnDolaresEuros.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                double dolares = Double.parseDouble(tfDolares.getText());
-                double euros = dolares * 0.91;
+    }
 
-                tfEuros.setText(String.valueOf(euros));
-            }
-        });
+    public void btnDolaresEurosActionPerformed (ActionEvent event) {
+        double dolares = Double.parseDouble(tfDolares.getText());
+        double euros = dolares * 0.91;
+
+        tfEuros.setText(String.valueOf(euros));
+
     }
 
     public static void main(String[] args) {
-        ConvertidorEurosDolares convertidorEurosDolares = new ConvertidorEurosDolares();
-        convertidorEurosDolares.setVisible(true);
+        javax.swing.SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                ConvertidorEurosDolares GUI = new ConvertidorEurosDolares();
+                GUI.setVisible(true);
+            }
+        });
     }
 }
