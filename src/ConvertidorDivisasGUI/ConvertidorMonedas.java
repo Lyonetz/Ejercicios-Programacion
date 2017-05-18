@@ -2,7 +2,7 @@
  * Created by JFormDesigner on Tue May 16 12:18:30 CEST 2017
  */
 
-package GUI;
+package ConvertidorDivisasGUI;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
