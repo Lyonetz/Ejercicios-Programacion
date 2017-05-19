@@ -390,7 +390,6 @@ public class Quiniela extends JFrame {
             }
         }
     }
-
     private void generarResultados() {
         Random rnd = new Random();
         int tmp;
