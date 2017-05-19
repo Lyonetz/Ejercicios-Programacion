@@ -389,7 +389,6 @@ public class Quiniela extends JFrame {
                 }
             }
         }
-
     }
 
     private void generarResultados() {
