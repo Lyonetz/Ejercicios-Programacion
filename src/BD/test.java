@@ -23,20 +23,17 @@ public class test {
                 arrayList2.add(resultSet.getInt("art_num"));
 
             }
+
+            stm.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
         } catch (ClassNotFoundException ex) {
             ex.printStackTrace();
         }
 
-        arrayList.forEach((string) -> {
-            System.out.println(string);
-        });
+        arrayList.forEach(System.out::println);
 
-        arrayList2.forEach((integer) ->{
-            System.out.println(integer);
-        });
+        arrayList2.forEach(System.out::println);
 
     }
-
 }
