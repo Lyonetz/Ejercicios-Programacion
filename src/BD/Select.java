@@ -2,10 +2,8 @@ package BD;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-public class test {
+public class Select {
 
     public static void main(String[] args) {
         ArrayList<String> arrayList = new ArrayList<>();
