@@ -1,0 +1,56 @@
+JFDML JFormDesigner: "6.0.1.0.112" Java: "1.8.0_112-release" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class net.miginfocom.swing.MigLayout ) {
+			"$layoutConstraints": "hidemode 3"
+			"$columnConstraints": "[fill][fill][fill][fill][fill][fill]"
+			"$rowConstraints": "[][][][][][][][][]"
+		} ) {
+			name: "this"
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label1"
+				"text": "CARTELERA"
+				"font": new java.awt.Font( "NimbusSans", 0, 23 )
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 3 0"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "btnPeliculas"
+				"text": "PELÍCULAS"
+				"font": new java.awt.Font( "URW Gothic", 1, 13 )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btnPeliculasActionPerformed", true ) )
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 3 2"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "btnActores"
+				"text": "ACTORES"
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 1, 0, false )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btnActoresActionPerformed", true ) )
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 3 4"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "btnDirectores"
+				"text": "DIRECTORES"
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 1, 0, false )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btnDirectoresActionPerformed", true ) )
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 3 6"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "btnSalir"
+				"text": "Salir"
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 1, 0, false )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btnSalirActionPerformed", true ) )
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 5 8"
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 310, 335 )
+		} )
+	}
+}
