@@ -6,12 +6,69 @@ package Cartelera;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.*;
+import java.util.ArrayList;
 import javax.swing.*;
 import net.miginfocom.swing.*;
 
 public class Peliculas extends JFrame {
+    final Connection co = UI.connection();
+
     public Peliculas() {
         initComponents();
+
+        cargarPeliculas();
+        cargarLista();
+    }
+
+    class Pelicula {
+        String titulo;
+        int agno;
+
+        public Pelicula(String titulo, int agno) {
+            this.titulo = titulo;
+            this.agno = agno;
+        }
+
+        public String getTitulo() {
+            return titulo;
+        }
+
+        public void setTitulo(String titulo) {
+            this.titulo = titulo;
+        }
+
+        public int getAgno() {
+            return agno;
+        }
+
+        public void setAgno(int agno) {
+            this.agno = agno;
+        }
+    }
+
+    private ArrayList<Pelicula> peliculas = new ArrayList<>();
+
+    private void cargarPeliculas() {
+        try {
+            Statement stm = co.createStatement();
+            ResultSet rs = stm.executeQuery("SELECT pel_tit,pel_agno FROM peliculas");
+
+            while(rs.next()) {
+                peliculas.add(new Pelicula(rs.getString("pel_tit"),rs.getInt("pel_agno")));
+            }
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void cargarLista() {
+        DefaultListModel<String> model = new DefaultListModel<>();
+
+        for(Pelicula pelicula: peliculas) {
+            model.addElement(pelicula.getTitulo() + "," + pelicula.getAgno());
+        }
+        listaPeliculas.setModel(model);
     }
 
     private void btnSalirActionPerformed(ActionEvent e) {

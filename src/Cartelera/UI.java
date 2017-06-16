@@ -6,12 +6,30 @@ package Cartelera;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import javax.swing.*;
 import net.miginfocom.swing.*;
 
 public class UI extends JFrame {
     public UI() {
         initComponents();
+    }
+
+    public static Connection connection() {
+        Connection connection = null;
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/cartelera", "root", "");
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return connection;
     }
 
     private void btnPeliculasActionPerformed(ActionEvent e) {
