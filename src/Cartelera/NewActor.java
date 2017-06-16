@@ -51,7 +51,7 @@ public class NewActor extends JFrame {
 
             pstm.execute();
 
-            fw.write("\n" + tfID + ";" + tfNombre + ";" + tfApellidos + ";" + tfFnac + ";" + tfNacionalidad + ";" + tfGenero + ";" + tfCache + ";");
+            fw.write(idActor + ";" + nomActor + ";" + apeActor + ";" + fnActor + ";" + nacActor + ";" + genActor + ";" + cachActor + ";");
 
             fw.close();
 

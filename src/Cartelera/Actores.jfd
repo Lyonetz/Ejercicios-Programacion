@@ -36,6 +36,7 @@ new FormModel {
 				name: "btnBorrar"
 				"text": "Borrar"
 				"font": new com.jformdesigner.model.SwingDerivedFont( null, 1, 0, false )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btnBorrarActionPerformed", true ) )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 				"value": "cell 7 3"
 			} )

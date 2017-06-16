@@ -6,10 +6,9 @@ package Cartelera;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.sql.*;
 import java.util.ArrayList;
 import javax.swing.*;
 import net.miginfocom.swing.*;
@@ -29,12 +28,20 @@ public class Actores extends JFrame {
         String nombre;
         String apellido;
         String nacionalidad;
+        String fnac;
+        String nac;
+        String gen;
+        int cache;
 
-        public Actor(int id, String nombre, String apellido, String nacionalidad) {
+        public Actor(int id, String nombre, String apellido, String nacionalidad, String fnac, String nac, String gen, int cache) {
             this.id = id;
             this.nombre = nombre;
             this.apellido = apellido;
             this.nacionalidad = nacionalidad;
+            this.fnac = fnac;
+            this.nac = nac;
+            this.gen = gen;
+            this.cache = cache;
         }
 
         public int getId() {
@@ -68,6 +75,38 @@ public class Actores extends JFrame {
         public void setNacionalidad(String nacionalidad) {
             this.nacionalidad = nacionalidad;
         }
+
+        public String getFnac() {
+            return fnac;
+        }
+
+        public void setFnac(String fnac) {
+            this.fnac = fnac;
+        }
+
+        public String getNac() {
+            return nac;
+        }
+
+        public void setNac(String nac) {
+            this.nac = nac;
+        }
+
+        public String getGen() {
+            return gen;
+        }
+
+        public void setGen(String gen) {
+            this.gen = gen;
+        }
+
+        public int getCache() {
+            return cache;
+        }
+
+        public void setCache(int cache) {
+            this.cache = cache;
+        }
     }
 
     private static ArrayList<Actor> actores = new ArrayList<>();
@@ -75,10 +114,11 @@ public class Actores extends JFrame {
     private void cargarActores() {
         try {
             Statement stm = co.createStatement();
-            ResultSet rs = stm.executeQuery("SELECT act_id,act_nom,act_ape,act_nac FROM actores");
+            ResultSet rs = stm.executeQuery("SELECT act_id,act_nom,act_ape,act_fnac,act_nac,act_gen,act_cache FROM actores");
 
             while(rs.next()) {
-                actores.add(new Actor(rs.getInt("act_id"),rs.getString("act_nom"),rs.getString("act_ape"),rs.getString("act_nac")));
+                Actor a = new Actor(rs.getInt("act_id"),rs.getString("act_nom"),rs.getString("act_ape"),rs.getString("act_nac"),rs.getString("act_fnac"),rs.getString("act_nac"),rs.getString("act_gen"),rs.getInt("act_cache"));
+                actores.add(a);
             }
         } catch(SQLException e) {
             e.printStackTrace();
@@ -108,6 +148,31 @@ public class Actores extends JFrame {
         na.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         na.setVisible(true);
         this.dispose();
+    }
+
+    private void btnBorrarActionPerformed(ActionEvent e) {
+        int seleccion = listaActores.getSelectedIndex();
+
+        try {
+            Statement stm = co.createStatement();
+            FileWriter fw = new FileWriter("/home/carlos/Documents/FP/Base de Datos/Cartelera/carga_actores.txt",false);
+
+            String query = "DELETE FROM actores WHERE act_id = " + actores.get(seleccion);
+
+            stm.execute(query);
+
+            actores.remove(seleccion);
+
+            for(Actor actor: actores) {
+                fw.write(actor.getId() + ";" + actor.getNombre() + ";" + actor.getApellido() + ";" + actor.getFnac() + ";" + actor.getNac() + ";" + actor.getGen() + ";" + actor.getCache() + ";");
+            }
+            fw.close();
+
+        } catch (SQLException e2) {
+            e2.printStackTrace();
+        } catch (IOException e2) {
+            e2.printStackTrace();
+        }
     }
 
     private void initComponents() {
@@ -161,6 +226,7 @@ public class Actores extends JFrame {
         //---- btnBorrar ----
         btnBorrar.setText("Borrar");
         btnBorrar.setFont(btnBorrar.getFont().deriveFont(btnBorrar.getFont().getStyle() | Font.BOLD));
+        btnBorrar.addActionListener(e -> btnBorrarActionPerformed(e));
         contentPane.add(btnBorrar, "cell 7 3");
 
         //---- btnSalir ----
