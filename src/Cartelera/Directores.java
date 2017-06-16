@@ -5,12 +5,17 @@
 package Cartelera;
 
 import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
 import net.miginfocom.swing.*;
 
 public class Directores extends JFrame {
     public Directores() {
         initComponents();
+    }
+
+    private void btnSalirActionPerformed(ActionEvent e) {
+        dispose();
     }
 
     private void initComponents() {
@@ -67,6 +72,7 @@ public class Directores extends JFrame {
         //---- btnSalir ----
         btnSalir.setText("Salir");
         btnSalir.setFont(btnSalir.getFont().deriveFont(btnSalir.getFont().getStyle() | Font.BOLD));
+        btnSalir.addActionListener(e -> btnSalirActionPerformed(e));
         contentPane.add(btnSalir, "cell 5 5");
         pack();
         setLocationRelativeTo(getOwner());
