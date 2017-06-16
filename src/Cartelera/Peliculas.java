@@ -12,7 +12,7 @@ import javax.swing.*;
 import net.miginfocom.swing.*;
 
 public class Peliculas extends JFrame {
-    final Connection co = UI.connection();
+    final private Connection co = UI.connection();
 
     public Peliculas() {
         initComponents();

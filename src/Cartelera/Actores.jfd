@@ -5,7 +5,7 @@ new FormModel {
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class net.miginfocom.swing.MigLayout ) {
 			"$layoutConstraints": "hidemode 3"
-			"$columnConstraints": "[fill][fill][fill][fill][fill][fill][fill][fill]"
+			"$columnConstraints": "[fill][fill][fill][fill][0,fill][203,fill][fill][fill]"
 			"$rowConstraints": "[][][][][7][]"
 		} ) {
 			name: "this"
@@ -14,15 +14,15 @@ new FormModel {
 				"text": "ACTORES"
 				"font": new java.awt.Font( "Nimbus Sans", 1, 23 )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 6 0"
+				"value": "cell 5 0"
 			} )
 			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 				name: "scrollPane1"
 				add( new FormComponent( "javax.swing.JList" ) {
-					name: "list1"
+					name: "listaActores"
 				} )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 6 1"
+				"value": "cell 5 1"
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "btnAnadir"

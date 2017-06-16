@@ -34,16 +34,19 @@ public class UI extends JFrame {
 
     private void btnPeliculasActionPerformed(ActionEvent e) {
         Peliculas p = new Peliculas();
+        p.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         p.setVisible(true);
     }
 
     private void btnActoresActionPerformed(ActionEvent e) {
         Actores a = new Actores();
+        a.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         a.setVisible(true);
     }
 
     private void btnDirectoresActionPerformed(ActionEvent e) {
         Directores d = new Directores();
+        d.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         d.setVisible(true);
     }
 
