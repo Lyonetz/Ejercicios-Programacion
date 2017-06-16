@@ -127,7 +127,7 @@ public class Peliculas extends JFrame {
         contentPane.add(btnBorrar, "cell 6 3");
 
         //---- btnSalir ----
-        btnSalir.setText("Salir");
+        btnSalir.setText("Volver");
         btnSalir.setFont(btnSalir.getFont().deriveFont(btnSalir.getFont().getStyle() | Font.BOLD));
         btnSalir.addActionListener(e -> btnSalirActionPerformed(e));
         contentPane.add(btnSalir, "cell 6 5");

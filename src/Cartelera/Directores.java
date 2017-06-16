@@ -115,7 +115,7 @@ public class Directores extends JFrame {
             "[fill]" +
             "[fill]" +
             "[fill]" +
-            "[183,fill]" +
+            "[242,fill]" +
             "[fill]" +
             "[fill]",
             // rows
@@ -148,7 +148,7 @@ public class Directores extends JFrame {
         contentPane.add(btnBorrar, "cell 5 3");
 
         //---- btnSalir ----
-        btnSalir.setText("Salir");
+        btnSalir.setText("Volver");
         btnSalir.setFont(btnSalir.getFont().deriveFont(btnSalir.getFont().getStyle() | Font.BOLD));
         btnSalir.addActionListener(e -> btnSalirActionPerformed(e));
         contentPane.add(btnSalir, "cell 5 5");

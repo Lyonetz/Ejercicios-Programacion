@@ -151,7 +151,7 @@ public class Actores extends JFrame {
         contentPane.add(btnBorrar, "cell 7 3");
 
         //---- btnSalir ----
-        btnSalir.setText("Salir");
+        btnSalir.setText("Volver");
         btnSalir.setFont(btnSalir.getFont().deriveFont(btnSalir.getFont().getStyle() | Font.BOLD));
         btnSalir.addActionListener(e -> btnSalirActionPerformed(e));
         contentPane.add(btnSalir, "cell 7 5");

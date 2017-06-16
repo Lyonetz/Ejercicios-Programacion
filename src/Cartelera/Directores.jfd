@@ -5,7 +5,7 @@ new FormModel {
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class net.miginfocom.swing.MigLayout ) {
 			"$layoutConstraints": "hidemode 3"
-			"$columnConstraints": "[fill][fill][fill][fill][183,fill][fill][fill]"
+			"$columnConstraints": "[fill][fill][fill][fill][242,fill][fill][fill]"
 			"$rowConstraints": "[][][][][6][]"
 		} ) {
 			name: "this"
@@ -40,7 +40,7 @@ new FormModel {
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "btnSalir"
-				"text": "Salir"
+				"text": "Volver"
 				"font": new com.jformdesigner.model.SwingDerivedFont( null, 1, 0, false )
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btnSalirActionPerformed", true ) )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
