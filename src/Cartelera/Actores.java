@@ -70,7 +70,7 @@ public class Actores extends JFrame {
         }
     }
 
-    private ArrayList<Actor> actores = new ArrayList<>();
+    private static ArrayList<Actor> actores = new ArrayList<>();
 
     private void cargarActores() {
         try {
@@ -86,16 +86,28 @@ public class Actores extends JFrame {
     }
 
     private void cargarLista() {
+
         DefaultListModel<String> model = new DefaultListModel<>();
 
         for(Actor actor: actores) {
             model.addElement(actor.getNombre() + " " + actor.getApellido() + "," + actor.getNacionalidad());
         }
         listaActores.setModel(model);
+
+        actores.clear();
     }
 
     private void btnSalirActionPerformed(ActionEvent e) {
         dispose();
+    }
+
+    private void btnAnadirActionPerformed(ActionEvent e) {
+        NewActor na = new NewActor();
+
+        na.setTitle("Añadir nuevo actor");
+        na.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        na.setVisible(true);
+        this.dispose();
     }
 
     private void initComponents() {
@@ -143,6 +155,7 @@ public class Actores extends JFrame {
         //---- btnAnadir ----
         btnAnadir.setText("A\u00f1adir");
         btnAnadir.setFont(btnAnadir.getFont().deriveFont(btnAnadir.getFont().getStyle() | Font.BOLD));
+        btnAnadir.addActionListener(e -> btnAnadirActionPerformed(e));
         contentPane.add(btnAnadir, "cell 7 2");
 
         //---- btnBorrar ----

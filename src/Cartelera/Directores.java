@@ -84,6 +84,8 @@ public class Directores extends JFrame {
     }
 
     private void cargarLista() {
+        listaDirectores.setModel(null);
+
         DefaultListModel<String> model = new DefaultListModel<>();
 
         for(Director director : directores) {

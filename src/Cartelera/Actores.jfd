@@ -28,6 +28,7 @@ new FormModel {
 				name: "btnAnadir"
 				"text": "Añadir"
 				"font": new com.jformdesigner.model.SwingDerivedFont( null, 1, 0, false )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btnAnadirActionPerformed", true ) )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 				"value": "cell 7 2"
 			} )
