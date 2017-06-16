@@ -112,6 +112,7 @@ public class Actores extends JFrame {
     private static ArrayList<Actor> actores = new ArrayList<>();
 
     private void cargarActores() {
+        actores.clear();
         try {
             Statement stm = co.createStatement();
             ResultSet rs = stm.executeQuery("SELECT act_id,act_nom,act_ape,act_fnac,act_nac,act_gen,act_cache FROM actores");
@@ -133,8 +134,6 @@ public class Actores extends JFrame {
             model.addElement(actor.getNombre() + " " + actor.getApellido() + "," + actor.getNacionalidad());
         }
         listaActores.setModel(model);
-
-        actores.clear();
     }
 
     private void btnSalirActionPerformed(ActionEvent e) {
@@ -157,14 +156,14 @@ public class Actores extends JFrame {
             Statement stm = co.createStatement();
             FileWriter fw = new FileWriter("/home/carlos/Documents/FP/Base de Datos/Cartelera/carga_actores.txt",false);
 
-            String query = "DELETE FROM actores WHERE act_id = " + actores.get(seleccion);
+            String query = "DELETE FROM actores WHERE act_id = " + actores.get(seleccion).getId();
 
             stm.execute(query);
 
             actores.remove(seleccion);
 
             for(Actor actor: actores) {
-                fw.write(actor.getId() + ";" + actor.getNombre() + ";" + actor.getApellido() + ";" + actor.getFnac() + ";" + actor.getNac() + ";" + actor.getGen() + ";" + actor.getCache() + ";");
+                fw.write(actor.getId() + ";" + actor.getNombre() + ";" + actor.getApellido() + ";" + actor.getFnac() + ";" + actor.getNac() + ";" + actor.getGen() + ";" + actor.getCache() + ";\n" );
             }
             fw.close();
 
@@ -173,6 +172,8 @@ public class Actores extends JFrame {
         } catch (IOException e2) {
             e2.printStackTrace();
         }
+        cargarActores();
+        cargarLista();
     }
 
     private void initComponents() {
