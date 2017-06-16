@@ -6,12 +6,90 @@ package Cartelera;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.*;
+import java.sql.Statement;
+import java.util.ArrayList;
 import javax.swing.*;
 import net.miginfocom.swing.*;
 
 public class Directores extends JFrame {
+    final private Connection co = UI.connection();
+
     public Directores() {
         initComponents();
+
+        cargarDirectores();
+        cargarLista();
+    }
+
+    class Director {
+        int id;
+        String nombre;
+        String apellido;
+        String nacionalidad;
+
+        public Director(int id, String nombre, String apellido, String nacionalidad) {
+            this.id = id;
+            this.nombre = nombre;
+            this.apellido = apellido;
+            this.nacionalidad = nacionalidad;
+        }
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public String getNombre() {
+            return nombre;
+        }
+
+        public void setNombre(String nombre) {
+            this.nombre = nombre;
+        }
+
+        public String getApellido() {
+            return apellido;
+        }
+
+        public void setApellido(String apellido) {
+            this.apellido = apellido;
+        }
+
+        public String getNacionalidad() {
+            return nacionalidad;
+        }
+
+        public void setNacionalidad(String nacionalidad) {
+            this.nacionalidad = nacionalidad;
+        }
+    }
+
+    private ArrayList<Director> directores = new ArrayList<>();
+
+    private void cargarDirectores() {
+        try {
+            Statement stm = co.createStatement();
+            ResultSet rs = stm.executeQuery("SELECT dir_id,dir_nom,dir_ape,dir_nac FROM directores");
+
+            while(rs.next()) {
+                directores.add(new Director(rs.getInt("dir_id"),rs.getString("dir_nom"),rs.getString("dir_ape"),rs.getString("dir_nac")));
+            }
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void cargarLista() {
+        DefaultListModel<String> model = new DefaultListModel<>();
+
+        for(Director director : directores) {
+            model.addElement(director.getNombre() + " " + director.getApellido() + "," + director.getNacionalidad());
+        }
+        listaDirectores.setModel(model);
     }
 
     private void btnSalirActionPerformed(ActionEvent e) {
@@ -23,7 +101,7 @@ public class Directores extends JFrame {
         // Generated using JFormDesigner Evaluation license - Jaime Leon
         label1 = new JLabel();
         scrollPane1 = new JScrollPane();
-        list1 = new JList();
+        listaDirectores = new JList();
         btnAnadir = new JButton();
         btnBorrar = new JButton();
         btnSalir = new JButton();
@@ -37,7 +115,7 @@ public class Directores extends JFrame {
             "[fill]" +
             "[fill]" +
             "[fill]" +
-            "[fill]" +
+            "[183,fill]" +
             "[fill]" +
             "[fill]",
             // rows
@@ -55,7 +133,7 @@ public class Directores extends JFrame {
 
         //======== scrollPane1 ========
         {
-            scrollPane1.setViewportView(list1);
+            scrollPane1.setViewportView(listaDirectores);
         }
         contentPane.add(scrollPane1, "cell 4 1");
 
@@ -83,7 +161,7 @@ public class Directores extends JFrame {
     // Generated using JFormDesigner Evaluation license - Jaime Leon
     private JLabel label1;
     private JScrollPane scrollPane1;
-    private JList list1;
+    private JList listaDirectores;
     private JButton btnAnadir;
     private JButton btnBorrar;
     private JButton btnSalir;
