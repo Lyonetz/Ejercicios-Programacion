@@ -1,4 +1,4 @@
-JFDML JFormDesigner: "6.0.1.0.112" Java: "1.8.0_112-release" encoding: "UTF-8"
+JFDML JFormDesigner: "6.0.1.0.112" Java: "1.8.0_131" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
@@ -28,6 +28,7 @@ new FormModel {
 				name: "btnAnadir"
 				"text": "Añadir"
 				"font": new com.jformdesigner.model.SwingDerivedFont( null, 1, 0, false )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btnAnadirActionPerformed", true ) )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 				"value": "cell 5 2"
 			} )
@@ -35,6 +36,7 @@ new FormModel {
 				name: "btnBorrar"
 				"text": "Borrar"
 				"font": new com.jformdesigner.model.SwingDerivedFont( null, 1, 0, false )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btnBorrarActionPerformed", true ) )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 				"value": "cell 5 3"
 			} )
@@ -42,6 +44,7 @@ new FormModel {
 				name: "btnSalir"
 				"text": "Volver"
 				"font": new com.jformdesigner.model.SwingDerivedFont( null, 1, 0, false )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btnSalirActionPerformed", true ) )
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btnSalirActionPerformed", true ) )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 				"value": "cell 5 5"

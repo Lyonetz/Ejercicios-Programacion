@@ -154,7 +154,7 @@ public class Actores extends JFrame {
 
         try {
             Statement stm = co.createStatement();
-            FileWriter fw = new FileWriter("/home/carlos/Documents/FP/Base de Datos/Cartelera/carga_actores.txt",false);
+            FileWriter fw = new FileWriter("/home/mingle/Downloads/Telegram Desktop/carga_actores.txt",false);
 
             String query = "DELETE FROM actores WHERE act_id = " + actores.get(seleccion).getId();
 
@@ -176,9 +176,14 @@ public class Actores extends JFrame {
         cargarLista();
     }
 
+    private void btnRefreshActionPerformed(ActionEvent e) {
+        cargarActores();
+        cargarLista();
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        // Generated using JFormDesigner Evaluation license - Jaime Leon
+        // Generated using JFormDesigner Evaluation license - Maingol Dulorres
         label1 = new JLabel();
         scrollPane1 = new JScrollPane();
         listaActores = new JList();
@@ -241,7 +246,7 @@ public class Actores extends JFrame {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - Jaime Leon
+    // Generated using JFormDesigner Evaluation license - Maingol Dulorres
     private JLabel label1;
     private JScrollPane scrollPane1;
     private JList listaActores;

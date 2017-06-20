@@ -4,8 +4,6 @@ import javax.swing.*;
 
 public class Controller {
     public static void main(String[] args) {
-        //HOLA JUAPO
-
         UI ui = new UI();
 
         ui.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

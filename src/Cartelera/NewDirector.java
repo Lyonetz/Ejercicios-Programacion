@@ -1,5 +1,5 @@
 /*
- * Created by JFormDesigner on Fri Jun 16 08:23:31 UTC 2017
+ * Created by JFormDesigner on Mon Jun 19 20:15:25 CEST 2017
  */
 
 package Cartelera;
@@ -13,45 +13,43 @@ import javax.swing.*;
 import net.miginfocom.swing.*;
 
 /**
- * @author Jaime Leon
+ * @author Maingol Dulorres
  */
-public class NewActor extends JFrame {
+public class NewDirector extends JFrame {
     final private Connection co = UI.connection();
 
-    public NewActor() {
+    public NewDirector() {
         initComponents();
     }
 
     private void btnConfirmarActionPerformed(ActionEvent e) {
-
         try {
             Statement stm = co.createStatement();
-            FileWriter fw = new FileWriter("/home/mingle/Downloads/Telegram Desktop/carga_actores.txt",true);
+            FileWriter fw = new FileWriter("/home/mingle/Downloads/Telegram Desktop/carga_directores.txt",true);
 
-            String query = " INSERT INTO cartelera.actores (act_id,act_nom,act_ape,act_fnac,act_nac,act_gen,act_cache)"
+            String query = " INSERT INTO cartelera.directores (dir_id, dir_nom, dir_ape, dir_fnac, dir_nac, dir_osc, dir_goy)"
                     + " VALUES (?,?,?,?,?,?,?)";
 
-            String idActor = tfID.getText();
-            String nomActor = tfNombre.getText();
-            String apeActor = tfApellidos.getText();
-            String fnActor = tfFnac.getText();
-            String nacActor = tfNacionalidad.getText();
-            String genActor = tfGenero.getText();
-            String cachActor = tfCache.getText();
-
+            String idDirector = tfID.getText();
+            String nomDirector = tfNombre.getText();
+            String apeDirector = tfApellidos.getText();
+            String fnDirector = tfFnac.getText();
+            String nacDirector = tfNacionalidad.getText();
+            String oscDirector = tfOscars.getText();
+            String goyDirector = tfGoyas.getText();
 
             PreparedStatement pstm = co.prepareStatement(query);
-            pstm.setInt(1,Integer.parseInt(idActor));
-            pstm.setString(2,nomActor);
-            pstm.setString(3,apeActor);
-            pstm.setString(4,fnActor);
-            pstm.setString(5,nacActor);
-            pstm.setString(6,genActor);
-            pstm.setInt(7,Integer.parseInt(cachActor));
+            pstm.setInt(1,Integer.parseInt(idDirector));
+            pstm.setString(2,nomDirector);
+            pstm.setString(3,apeDirector);
+            pstm.setString(4,fnDirector);
+            pstm.setString(5,nacDirector);
+            pstm.setInt(6,Integer.parseInt(oscDirector));
+            pstm.setInt(7,Integer.parseInt(goyDirector));
 
             pstm.execute();
 
-            fw.write(idActor + ";" + nomActor + ";" + apeActor + ";" + fnActor + ";" + nacActor + ";" + genActor + ";" + cachActor + ";");
+            fw.write(idDirector + ";" + nomDirector + ";" + apeDirector + ";" + fnDirector + ";" + nacDirector + ";" + oscDirector + ";" + goyDirector + ";");
 
             fw.close();
 
@@ -62,14 +60,23 @@ public class NewActor extends JFrame {
             e2.printStackTrace();
         }
 
-        Actores a = new Actores();
-        a.setVisible(true);
+        Directores d = new Directores();
+        d.setTitle("Directores");
+        d.setVisible(true);
+        d.setLocationRelativeTo(null);
+        d.setResizable(false);
+        d.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         dispose();
     }
 
+
     private void btnCancelarActionPerformed(ActionEvent e) {
-        Actores a = new Actores();
-        a.setVisible(true);
+        Directores d = new Directores();
+        d.setTitle("Directores");
+        d.setVisible(true);
+        d.setLocationRelativeTo(null);
+        d.setResizable(false);
+        d.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         dispose();
     }
 
@@ -88,9 +95,9 @@ public class NewActor extends JFrame {
         label3 = new JLabel();
         tfApellidos = new JTextField();
         label7 = new JLabel();
-        tfGenero = new JTextField();
+        tfOscars = new JTextField();
         label8 = new JLabel();
-        tfCache = new JTextField();
+        tfGoyas = new JTextField();
         btnConfirmar = new JButton();
         btnCancelar = new JButton();
 
@@ -101,12 +108,11 @@ public class NewActor extends JFrame {
             // columns
             "[fill]" +
             "[fill]" +
+            "[fill]" +
             "[118,fill]" +
             "[fill]" +
             "[fill]" +
-            "[fill]" +
-            "[fill]" +
-            "[119,fill]",
+            "[131,fill]",
             // rows
             "[]" +
             "[]" +
@@ -117,15 +123,15 @@ public class NewActor extends JFrame {
             "[]"));
 
         //---- label4 ----
-        label4.setText("INFORMACI\u00d3N DEL ACTOR");
+        label4.setText("INFORMACI\u00d3N DEL DIRECTOR");
         label4.setFont(label4.getFont().deriveFont(label4.getFont().getStyle() | Font.BOLD, label4.getFont().getSize() + 3f));
-        contentPane.add(label4, "cell 4 0");
+        contentPane.add(label4, "cell 4 1");
 
         //---- label1 ----
         label1.setText("ID");
         label1.setFont(label1.getFont().deriveFont(label1.getFont().getStyle() | Font.BOLD));
-        contentPane.add(label1, "cell 0 2");
-        contentPane.add(tfID, "cell 2 2");
+        contentPane.add(label1, "cell 2 2");
+        contentPane.add(tfID, "cell 3 2");
 
         //---- label5 ----
         label5.setText("F. Nacimiento (A-M-D)");
@@ -134,58 +140,59 @@ public class NewActor extends JFrame {
 
         //---- tfFnac ----
         tfFnac.setCursor(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));
-        contentPane.add(tfFnac, "cell 7 2");
+        contentPane.add(tfFnac, "cell 6 2");
 
         //---- label2 ----
         label2.setText("Nombre");
         label2.setFont(label2.getFont().deriveFont(label2.getFont().getStyle() | Font.BOLD));
-        contentPane.add(label2, "cell 0 3");
-        contentPane.add(tfNombre, "cell 2 3");
+        contentPane.add(label2, "cell 2 3");
+        contentPane.add(tfNombre, "cell 3 3");
 
         //---- label6 ----
         label6.setText("Nacionalidad");
         label6.setFont(label6.getFont().deriveFont(label6.getFont().getStyle() | Font.BOLD));
         contentPane.add(label6, "cell 5 3");
-        contentPane.add(tfNacionalidad, "cell 7 3");
+        contentPane.add(tfNacionalidad, "cell 6 3");
 
         //---- label3 ----
         label3.setText("Apellido ");
         label3.setFont(label3.getFont().deriveFont(label3.getFont().getStyle() | Font.BOLD));
-        contentPane.add(label3, "cell 0 4");
-        contentPane.add(tfApellidos, "cell 2 4");
+        contentPane.add(label3, "cell 2 4");
+        contentPane.add(tfApellidos, "cell 3 4");
 
         //---- label7 ----
-        label7.setText("G\u00e9nero");
+        label7.setText("N\u00ba Oscars");
         label7.setFont(label7.getFont().deriveFont(label7.getFont().getStyle() | Font.BOLD));
         contentPane.add(label7, "cell 5 4");
-        contentPane.add(tfGenero, "cell 7 4");
+        contentPane.add(tfOscars, "cell 6 4");
 
         //---- label8 ----
-        label8.setText("Cach\u00e9");
+        label8.setText("N\u00ba Goyas");
         label8.setFont(label8.getFont().deriveFont(label8.getFont().getStyle() | Font.BOLD));
         contentPane.add(label8, "cell 5 5");
 
-        //---- tfCache ----
-        tfCache.setCursor(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));
-        contentPane.add(tfCache, "cell 7 5");
+        //---- tfGoyas ----
+        tfGoyas.setCursor(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));
+        contentPane.add(tfGoyas, "cell 6 5");
 
         //---- btnConfirmar ----
         btnConfirmar.setText("Confirmar");
         btnConfirmar.setFont(btnConfirmar.getFont().deriveFont(btnConfirmar.getFont().getStyle() | Font.BOLD));
-        btnConfirmar.addActionListener(e -> btnConfirmarActionPerformed(e));
+        btnConfirmar.addActionListener(e -> {
+			btnConfirmarActionPerformed(e);
+			btnConfirmarActionPerformed(e);
+		});
         contentPane.add(btnConfirmar, "cell 5 6");
 
         //---- btnCancelar ----
         btnCancelar.setText("Cancelar");
         btnCancelar.setFont(btnCancelar.getFont().deriveFont(btnCancelar.getFont().getStyle() | Font.BOLD));
         btnCancelar.addActionListener(e -> btnCancelarActionPerformed(e));
-        contentPane.add(btnCancelar, "cell 7 6");
+        contentPane.add(btnCancelar, "cell 6 6");
         pack();
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
-
-
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     // Generated using JFormDesigner Evaluation license - Maingol Dulorres
@@ -201,9 +208,9 @@ public class NewActor extends JFrame {
     private JLabel label3;
     private JTextField tfApellidos;
     private JLabel label7;
-    private JTextField tfGenero;
+    private JTextField tfOscars;
     private JLabel label8;
-    private JTextField tfCache;
+    private JTextField tfGoyas;
     private JButton btnConfirmar;
     private JButton btnCancelar;
     // JFormDesigner - End of variables declaration  //GEN-END:variables

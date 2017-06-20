@@ -6,6 +6,8 @@ package Cartelera;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.*;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -26,13 +28,19 @@ public class Directores extends JFrame {
         int id;
         String nombre;
         String apellido;
+        String fnac;
         String nacionalidad;
+        int osc;
+        int goy;
 
-        public Director(int id, String nombre, String apellido, String nacionalidad) {
+        public Director(int id, String nombre, String apellido, String fnac, String nacionalidad, int osc, int goy) {
             this.id = id;
             this.nombre = nombre;
             this.apellido = apellido;
+            this.fnac = fnac;
             this.nacionalidad = nacionalidad;
+            this.osc = osc;
+            this.goy = goy;
         }
 
         public int getId() {
@@ -66,17 +74,42 @@ public class Directores extends JFrame {
         public void setNacionalidad(String nacionalidad) {
             this.nacionalidad = nacionalidad;
         }
+
+        public String getFnac() {
+            return fnac;
+        }
+
+        public void setFnac(String fnac) {
+            this.fnac = fnac;
+        }
+
+        public int getOsc() {
+            return osc;
+        }
+
+        public void setOsc(int osc) {
+            this.osc = osc;
+        }
+
+        public int getGoy() {
+            return goy;
+        }
+
+        public void setGoy(int goy) {
+            this.goy = goy;
+        }
     }
 
     private ArrayList<Director> directores = new ArrayList<>();
 
     private void cargarDirectores() {
+        directores.clear();
         try {
             Statement stm = co.createStatement();
-            ResultSet rs = stm.executeQuery("SELECT dir_id,dir_nom,dir_ape,dir_nac FROM directores");
+            ResultSet rs = stm.executeQuery("SELECT * FROM directores");
 
             while(rs.next()) {
-                directores.add(new Director(rs.getInt("dir_id"),rs.getString("dir_nom"),rs.getString("dir_ape"),rs.getString("dir_nac")));
+                directores.add(new Director(rs.getInt("dir_id"),rs.getString("dir_nom"),rs.getString("dir_ape"),rs.getString("dir_fnac"),rs.getString("dir_nac"),rs.getInt("dir_osc"),rs.getInt("dir_goy")));
             }
         } catch(SQLException e) {
             e.printStackTrace();
@@ -84,8 +117,6 @@ public class Directores extends JFrame {
     }
 
     private void cargarLista() {
-        listaDirectores.setModel(null);
-
         DefaultListModel<String> model = new DefaultListModel<>();
 
         for(Director director : directores) {
@@ -98,9 +129,47 @@ public class Directores extends JFrame {
         dispose();
     }
 
+    private void btnBorrarActionPerformed(ActionEvent e) {
+        int seleccion = listaDirectores.getSelectedIndex();
+
+        try {
+            Statement stm = co.createStatement();
+            FileWriter fw = new FileWriter("/home/mingle/Downloads/Telegram Desktop/carga_directores.txt",false);
+
+            String query = "DELETE FROM directores WHERE dir_id = " + directores.get(seleccion).getId();
+
+            stm.execute(query);
+
+            directores.remove(seleccion);
+
+            for(Director director: directores) {
+                fw.write(director.getId() + ";" + director.getNombre() + ";" + director.getApellido() + ";" + director.getFnac() + ";" + director.getNacionalidad() + ";" + director.getOsc() + ";" + director.getGoy() + ";\n" );
+            }
+            fw.close();
+
+        } catch (SQLException e2) {
+            e2.printStackTrace();
+        } catch (IOException e2) {
+            e2.printStackTrace();
+        }
+        cargarDirectores();
+        cargarLista();
+    }
+
+    private void btnAnadirActionPerformed(ActionEvent e) {
+        NewDirector nd = new NewDirector();
+
+        nd.setTitle("Añadir nuevo director");
+        nd.setVisible(true);
+        nd.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        nd.setResizable(false);
+        nd.setLocationRelativeTo(null);
+        this.dispose();
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        // Generated using JFormDesigner Evaluation license - Jaime Leon
+        // Generated using JFormDesigner Evaluation license - Maingol Dulorres
         label1 = new JLabel();
         scrollPane1 = new JScrollPane();
         listaDirectores = new JList();
@@ -142,17 +211,22 @@ public class Directores extends JFrame {
         //---- btnAnadir ----
         btnAnadir.setText("A\u00f1adir");
         btnAnadir.setFont(btnAnadir.getFont().deriveFont(btnAnadir.getFont().getStyle() | Font.BOLD));
+        btnAnadir.addActionListener(e -> btnAnadirActionPerformed(e));
         contentPane.add(btnAnadir, "cell 5 2");
 
         //---- btnBorrar ----
         btnBorrar.setText("Borrar");
         btnBorrar.setFont(btnBorrar.getFont().deriveFont(btnBorrar.getFont().getStyle() | Font.BOLD));
+        btnBorrar.addActionListener(e -> btnBorrarActionPerformed(e));
         contentPane.add(btnBorrar, "cell 5 3");
 
         //---- btnSalir ----
         btnSalir.setText("Volver");
         btnSalir.setFont(btnSalir.getFont().deriveFont(btnSalir.getFont().getStyle() | Font.BOLD));
-        btnSalir.addActionListener(e -> btnSalirActionPerformed(e));
+        btnSalir.addActionListener(e -> {
+			btnSalirActionPerformed(e);
+			btnSalirActionPerformed(e);
+		});
         contentPane.add(btnSalir, "cell 5 5");
         pack();
         setLocationRelativeTo(getOwner());
@@ -160,7 +234,7 @@ public class Directores extends JFrame {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - Jaime Leon
+    // Generated using JFormDesigner Evaluation license - Maingol Dulorres
     private JLabel label1;
     private JScrollPane scrollPane1;
     private JList listaDirectores;
