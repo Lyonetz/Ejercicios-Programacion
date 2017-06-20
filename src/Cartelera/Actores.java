@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import javax.swing.*;
+import javax.swing.event.*;
 import net.miginfocom.swing.*;
 
 public class Actores extends JFrame {
@@ -18,7 +19,7 @@ public class Actores extends JFrame {
 
     public Actores() {
         initComponents();
-
+        btnBorrar.setEnabled(false);
         cargarActores();
         cargarLista();
     }
@@ -181,6 +182,13 @@ public class Actores extends JFrame {
         cargarLista();
     }
 
+    private void listaActoresValueChanged(ListSelectionEvent e) {
+        if (!listaActores.isSelectionEmpty())
+            btnBorrar.setEnabled(true);
+        else
+            btnBorrar.setEnabled(false);
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - Maingol Dulorres
@@ -219,6 +227,9 @@ public class Actores extends JFrame {
 
         //======== scrollPane1 ========
         {
+
+            //---- listaActores ----
+            listaActores.addListSelectionListener(e -> listaActoresValueChanged(e));
             scrollPane1.setViewportView(listaActores);
         }
         contentPane.add(scrollPane1, "cell 5 1");

@@ -12,6 +12,7 @@ import java.sql.*;
 import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.*;
+import javax.swing.event.*;
 import net.miginfocom.swing.*;
 
 public class Directores extends JFrame {
@@ -19,7 +20,7 @@ public class Directores extends JFrame {
 
     public Directores() {
         initComponents();
-
+        btnBorrar.setEnabled(false);
         cargarDirectores();
         cargarLista();
     }
@@ -167,6 +168,13 @@ public class Directores extends JFrame {
         this.dispose();
     }
 
+    private void listaDirectoresValueChanged(ListSelectionEvent e) {
+        if (!listaDirectores.isSelectionEmpty())
+            btnBorrar.setEnabled(true);
+        else
+            btnBorrar.setEnabled(false);
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - Maingol Dulorres
@@ -204,6 +212,9 @@ public class Directores extends JFrame {
 
         //======== scrollPane1 ========
         {
+
+            //---- listaDirectores ----
+            listaDirectores.addListSelectionListener(e -> listaDirectoresValueChanged(e));
             scrollPane1.setViewportView(listaDirectores);
         }
         contentPane.add(scrollPane1, "cell 4 1");
