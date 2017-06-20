@@ -27,7 +27,7 @@ public class NewActor extends JFrame {
         try {
             Statement stm = co.createStatement();
             FileWriter fw = new FileWriter("/home/mingle/Downloads/Telegram Desktop/carga_actores.txt",true);
-
+            //Insert
             String query = " INSERT INTO cartelera.actores (act_id,act_nom,act_ape,act_fnac,act_nac,act_gen,act_cache)"
                     + " VALUES (?,?,?,?,?,?,?)";
 
