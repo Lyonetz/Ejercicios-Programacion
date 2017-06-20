@@ -8,6 +8,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.*;
 import javax.swing.*;
 import net.miginfocom.swing.*;
@@ -25,9 +26,10 @@ public class NewDirector extends JFrame {
     private void btnConfirmarActionPerformed(ActionEvent e) {
         try {
             Statement stm = co.createStatement();
-            FileWriter fw = new FileWriter("/home/mingle/Downloads/Telegram Desktop/carga_directores.txt",true);
+            //FileWriter fw = new FileWriter("/home/mingle/Downloads/Telegram Desktop/carga_directores.txt",true);
+            FileWriter fw = new FileWriter("/home/carlos/Documents/FP/Base de Datos/Cartelera/carga_directores.txt",true);
 
-            String query = " INSERT INTO cartelera.directores (dir_id, dir_nom, dir_ape, dir_fnac, dir_nac, dir_osc, dir_goy)"
+            String query = " INSERT INTO cartelera.directores (dir_id,dir_nom,dir_ape,dir_fnac,dir_nac,dir_osc,dir_goy)"
                     + " VALUES (?,?,?,?,?,?,?)";
 
             String idDirector = tfID.getText();
@@ -63,26 +65,18 @@ public class NewDirector extends JFrame {
         Directores d = new Directores();
         d.setTitle("Directores");
         d.setVisible(true);
-        d.setLocationRelativeTo(null);
-        d.setResizable(false);
-        d.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         dispose();
     }
 
-
     private void btnCancelarActionPerformed(ActionEvent e) {
         Directores d = new Directores();
-        d.setTitle("Directores");
         d.setVisible(true);
-        d.setLocationRelativeTo(null);
-        d.setResizable(false);
-        d.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         dispose();
     }
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        // Generated using JFormDesigner Evaluation license - Maingol Dulorres
+        // Generated using JFormDesigner Evaluation license - Jaime Leon
         label4 = new JLabel();
         label1 = new JLabel();
         tfID = new JTextField();
@@ -131,6 +125,9 @@ public class NewDirector extends JFrame {
         label1.setText("ID");
         label1.setFont(label1.getFont().deriveFont(label1.getFont().getStyle() | Font.BOLD));
         contentPane.add(label1, "cell 2 2");
+
+        //---- tfID ----
+        tfID.setEditable(false);
         contentPane.add(tfID, "cell 3 2");
 
         //---- label5 ----
@@ -195,7 +192,7 @@ public class NewDirector extends JFrame {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - Maingol Dulorres
+    // Generated using JFormDesigner Evaluation license - Jaime Leon
     private JLabel label4;
     private JLabel label1;
     private JTextField tfID;

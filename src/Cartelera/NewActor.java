@@ -26,9 +26,9 @@ public class NewActor extends JFrame {
 
         try {
             Statement stm = co.createStatement();
-            FileWriter fw = new FileWriter("/home/mingle/Downloads/Telegram Desktop/carga_actores.txt",true);
+            FileWriter fw = new FileWriter("/home/carlos/Documents/FP/Base de Datos/Cartelera/carga_actores.txt",true);
 
-            String query = " INSERT INTO cartelera.actores (act_id,act_nom,act_ape,act_fnac,act_nac,act_gen,act_cache)"
+            String query = " INSERT INTO actores (act_id,act_nom,act_ape,act_fnac,act_nac,act_gen,act_cache)"
                     + " VALUES (?,?,?,?,?,?,?)";
 
             String idActor = tfID.getText();
@@ -75,7 +75,7 @@ public class NewActor extends JFrame {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        // Generated using JFormDesigner Evaluation license - Maingol Dulorres
+        // Generated using JFormDesigner Evaluation license - Jaime Leon
         label4 = new JLabel();
         label1 = new JLabel();
         tfID = new JTextField();
@@ -93,6 +93,17 @@ public class NewActor extends JFrame {
         tfCache = new JTextField();
         btnConfirmar = new JButton();
         btnCancelar = new JButton();
+        try{
+            Statement stm = co.createStatement();
+            ResultSet rs = stm.executeQuery("SELECT COUNT(*) FROM actores");
+
+            if(rs.next()) {
+                int numAct = rs.getInt(1);
+                tfID.setText(String.valueOf(numAct+1));
+            }
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
 
         //======== this ========
         Container contentPane = getContentPane();
@@ -125,6 +136,9 @@ public class NewActor extends JFrame {
         label1.setText("ID");
         label1.setFont(label1.getFont().deriveFont(label1.getFont().getStyle() | Font.BOLD));
         contentPane.add(label1, "cell 0 2");
+
+        //---- tfID ----
+        tfID.setEditable(false);
         contentPane.add(tfID, "cell 2 2");
 
         //---- label5 ----
@@ -188,7 +202,7 @@ public class NewActor extends JFrame {
 
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - Maingol Dulorres
+    // Generated using JFormDesigner Evaluation license - Jaime Leon
     private JLabel label4;
     private JLabel label1;
     private JTextField tfID;

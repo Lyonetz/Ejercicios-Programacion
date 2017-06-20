@@ -106,10 +106,11 @@ public class Directores extends JFrame {
         directores.clear();
         try {
             Statement stm = co.createStatement();
-            ResultSet rs = stm.executeQuery("SELECT * FROM directores");
+            ResultSet rs = stm.executeQuery("SELECT dir_id,dir_nom,dir_ape,dir_fnac,dir_nac,dir_osc,dir_goy FROM directores");
 
             while(rs.next()) {
-                directores.add(new Director(rs.getInt("dir_id"),rs.getString("dir_nom"),rs.getString("dir_ape"),rs.getString("dir_fnac"),rs.getString("dir_nac"),rs.getInt("dir_osc"),rs.getInt("dir_goy")));
+                Director d = new Director(rs.getInt("dir_id"),rs.getString("dir_nom"),rs.getString("dir_ape"),rs.getString("dir_fnac"),rs.getString("dir_nac"),rs.getInt("dir_osc"),rs.getInt("dir_goy"));
+                directores.add(d);
             }
         } catch(SQLException e) {
             e.printStackTrace();
@@ -129,22 +130,38 @@ public class Directores extends JFrame {
         dispose();
     }
 
+    private void btnAnadirActionPerformed(ActionEvent e) {
+        NewDirector nd = new NewDirector();
+
+        nd.setTitle("Añadir nuevo director");
+        nd.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        nd.setVisible(true);
+        this.dispose();
+    }
+
     private void btnBorrarActionPerformed(ActionEvent e) {
         int seleccion = listaDirectores.getSelectedIndex();
 
         try {
             Statement stm = co.createStatement();
-            FileWriter fw = new FileWriter("/home/mingle/Downloads/Telegram Desktop/carga_directores.txt",false);
+            //FileWriter fw = new FileWriter("/home/mingle/Downloads/Telegram Desktop/carga_directores.txt",false);
+            FileWriter fw = new FileWriter("/home/carlos/Documents/FP/Base de Datos/carga_directores.txt",false);
 
-            String query = "DELETE FROM directores WHERE dir_id = " + directores.get(seleccion).getId();
+            if(seleccion == -1) {
+                this.setSize(450,300);
+                errorMessage.setText("Seleccione el director que desea borrar.");
+            } else {
+                String query = "DELETE FROM directores WHERE dir_id = " + directores.get(seleccion).getId();
 
-            stm.execute(query);
+                stm.execute(query);
 
-            directores.remove(seleccion);
+                directores.remove(seleccion);
 
-            for(Director director: directores) {
-                fw.write(director.getId() + ";" + director.getNombre() + ";" + director.getApellido() + ";" + director.getFnac() + ";" + director.getNacionalidad() + ";" + director.getOsc() + ";" + director.getGoy() + ";\n" );
+                for(Director director: directores) {
+                    fw.write(director.getId() + ";" + director.getNombre() + ";" + director.getApellido() + ";" + director.getFnac() + ";" + director.getNacionalidad() + ";" + director.getOsc() + ";" + director.getGoy() + ";\n" );
+                }
             }
+
             fw.close();
 
         } catch (SQLException e2) {
@@ -156,23 +173,13 @@ public class Directores extends JFrame {
         cargarLista();
     }
 
-    private void btnAnadirActionPerformed(ActionEvent e) {
-        NewDirector nd = new NewDirector();
-
-        nd.setTitle("Añadir nuevo director");
-        nd.setVisible(true);
-        nd.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        nd.setResizable(false);
-        nd.setLocationRelativeTo(null);
-        this.dispose();
-    }
-
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        // Generated using JFormDesigner Evaluation license - Maingol Dulorres
+        // Generated using JFormDesigner Evaluation license - Jaime Leon
         label1 = new JLabel();
         scrollPane1 = new JScrollPane();
         listaDirectores = new JList();
+        errorMessage = new JLabel();
         btnAnadir = new JButton();
         btnBorrar = new JButton();
         btnSalir = new JButton();
@@ -207,6 +214,7 @@ public class Directores extends JFrame {
             scrollPane1.setViewportView(listaDirectores);
         }
         contentPane.add(scrollPane1, "cell 4 1");
+        contentPane.add(errorMessage, "cell 4 2");
 
         //---- btnAnadir ----
         btnAnadir.setText("A\u00f1adir");
@@ -234,10 +242,11 @@ public class Directores extends JFrame {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - Maingol Dulorres
+    // Generated using JFormDesigner Evaluation license - Jaime Leon
     private JLabel label1;
     private JScrollPane scrollPane1;
     private JList listaDirectores;
+    private JLabel errorMessage;
     private JButton btnAnadir;
     private JButton btnBorrar;
     private JButton btnSalir;

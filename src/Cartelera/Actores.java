@@ -109,7 +109,7 @@ public class Actores extends JFrame {
         }
     }
 
-    private static ArrayList<Actor> actores = new ArrayList<>();
+    public static ArrayList<Actor> actores = new ArrayList<>();
 
     private void cargarActores() {
         actores.clear();
@@ -154,17 +154,24 @@ public class Actores extends JFrame {
 
         try {
             Statement stm = co.createStatement();
-            FileWriter fw = new FileWriter("/home/mingle/Downloads/Telegram Desktop/carga_actores.txt",false);
+            //FileWriter fw = new FileWriter("/home/mingle/Downloads/Telegram Desktop/carga_actores.txt",false);
+            FileWriter fw = new FileWriter("/home/carlos/Documents/FP/Base de Datos/carga_directores.txt",true);
 
-            String query = "DELETE FROM actores WHERE act_id = " + actores.get(seleccion).getId();
+            if(seleccion == -1){
+                this.setSize(450,300);
+                errorMessage.setText("Seleccione el actor que desea borrar.");
+            } else {
+                String query = "DELETE FROM actores WHERE act_id = " + actores.get(seleccion).getId();
 
-            stm.execute(query);
+                stm.execute(query);
 
-            actores.remove(seleccion);
+                actores.remove(seleccion);
 
-            for(Actor actor: actores) {
-                fw.write(actor.getId() + ";" + actor.getNombre() + ";" + actor.getApellido() + ";" + actor.getFnac() + ";" + actor.getNac() + ";" + actor.getGen() + ";" + actor.getCache() + ";\n" );
+                for(Actor actor: actores) {
+                    fw.write(actor.getId() + ";" + actor.getNombre() + ";" + actor.getApellido() + ";" + actor.getFnac() + ";" + actor.getNac() + ";" + actor.getGen() + ";" + actor.getCache() + ";\n" );
+                }
             }
+
             fw.close();
 
         } catch (SQLException e2) {
@@ -176,17 +183,14 @@ public class Actores extends JFrame {
         cargarLista();
     }
 
-    private void btnRefreshActionPerformed(ActionEvent e) {
-        cargarActores();
-        cargarLista();
-    }
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        // Generated using JFormDesigner Evaluation license - Maingol Dulorres
+        // Generated using JFormDesigner Evaluation license - Jaime Leon
         label1 = new JLabel();
         scrollPane1 = new JScrollPane();
         listaActores = new JList();
+        errorMessage = new JLabel();
         btnAnadir = new JButton();
         btnBorrar = new JButton();
         btnSalir = new JButton();
@@ -222,6 +226,7 @@ public class Actores extends JFrame {
             scrollPane1.setViewportView(listaActores);
         }
         contentPane.add(scrollPane1, "cell 5 1");
+        contentPane.add(errorMessage, "cell 5 2");
 
         //---- btnAnadir ----
         btnAnadir.setText("A\u00f1adir");
@@ -246,10 +251,11 @@ public class Actores extends JFrame {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - Maingol Dulorres
+    // Generated using JFormDesigner Evaluation license - Jaime Leon
     private JLabel label1;
     private JScrollPane scrollPane1;
     private JList listaActores;
+    private JLabel errorMessage;
     private JButton btnAnadir;
     private JButton btnBorrar;
     private JButton btnSalir;
