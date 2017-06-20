@@ -177,7 +177,6 @@ public class NewDirector extends JFrame {
         btnConfirmar.setFont(btnConfirmar.getFont().deriveFont(btnConfirmar.getFont().getStyle() | Font.BOLD));
         btnConfirmar.addActionListener(e -> {
 			btnConfirmarActionPerformed(e);
-			btnConfirmarActionPerformed(e);
 		});
         contentPane.add(btnConfirmar, "cell 5 6");
 
