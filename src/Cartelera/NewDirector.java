@@ -95,6 +95,18 @@ public class NewDirector extends JFrame {
         btnConfirmar = new JButton();
         btnCancelar = new JButton();
 
+        try{
+            Statement stm = co.createStatement();
+            ResultSet rs = stm.executeQuery("SELECT COUNT(*) FROM directores");
+
+            if(rs.next()) {
+                int numDir = rs.getInt(1);
+                tfID.setText(String.valueOf(numDir+1));
+            }
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+
         //======== this ========
         Container contentPane = getContentPane();
         contentPane.setLayout(new MigLayout(
