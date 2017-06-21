@@ -1,4 +1,4 @@
-JFDML JFormDesigner: "6.0.1.0.112" Java: "1.8.0_112-release" encoding: "UTF-8"
+JFDML JFormDesigner: "6.0.1.0.112" Java: "1.8.0_131" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
@@ -20,6 +20,7 @@ new FormModel {
 				name: "scrollPane1"
 				add( new FormComponent( "javax.swing.JList" ) {
 					name: "listaPeliculas"
+					addEvent( new FormEvent( "javax.swing.event.ListSelectionListener", "valueChanged", "listaPeliculasValueChanged", true ) )
 				} )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 				"value": "cell 5 1"
@@ -28,6 +29,7 @@ new FormModel {
 				name: "btnAnadir"
 				"text": "Añadir"
 				"font": new com.jformdesigner.model.SwingDerivedFont( null, 1, 0, false )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btnAnadirActionPerformed", true ) )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 				"value": "cell 6 2"
 			} )
@@ -35,6 +37,7 @@ new FormModel {
 				name: "btnBorrar"
 				"text": "Borrar"
 				"font": new com.jformdesigner.model.SwingDerivedFont( null, 1, 0, false )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btnBorrarActionPerformed", true ) )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 				"value": "cell 6 3"
 			} )

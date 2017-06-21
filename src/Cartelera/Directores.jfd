@@ -20,6 +20,7 @@ new FormModel {
 				name: "scrollPane1"
 				add( new FormComponent( "javax.swing.JList" ) {
 					name: "listaDirectores"
+					addEvent( new FormEvent( "javax.swing.event.ListSelectionListener", "valueChanged", "listaDirectoresValueChanged", true ) )
 				} )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 				"value": "cell 4 1"

@@ -51,7 +51,7 @@ public class NewDirector extends JFrame {
 
             pstm.execute();
 
-            fw.write(idDirector + ";" + nomDirector + ";" + apeDirector + ";" + fnDirector + ";" + nacDirector + ";" + oscDirector + ";" + goyDirector + ";");
+            fw.write(idDirector + ";" + nomDirector + ";" + apeDirector + ";" + fnDirector + ";" + nacDirector + ";" + oscDirector + ";" + goyDirector + "\n;");
 
             fw.close();
 
@@ -176,6 +176,7 @@ public class NewDirector extends JFrame {
         btnConfirmar.setText("Confirmar");
         btnConfirmar.setFont(btnConfirmar.getFont().deriveFont(btnConfirmar.getFont().getStyle() | Font.BOLD));
         btnConfirmar.addActionListener(e -> {
+			btnConfirmarActionPerformed(e);
 			btnConfirmarActionPerformed(e);
 		});
         contentPane.add(btnConfirmar, "cell 5 6");

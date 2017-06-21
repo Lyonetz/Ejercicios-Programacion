@@ -12,5 +12,4 @@ public class Controller {
         ui.setSize(250,275);
         ui.setVisible(true);
     }
-
 }
