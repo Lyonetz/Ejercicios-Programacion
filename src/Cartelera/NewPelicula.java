@@ -48,7 +48,7 @@ public class NewPelicula extends JFrame {
 
             pstm.execute();
 
-            fw.write(titulo + ";" + agno + ";" + duracion + ";" + genero + ";" + dir + "\n;");
+            fw.write(titulo + ";" + agno + ";" + duracion + ";" + genero + ";" + dir + ";\n");
 
             fw.close();
 
