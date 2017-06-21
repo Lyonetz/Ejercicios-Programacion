@@ -49,7 +49,7 @@ public class NewDirector extends JFrame {
 
             pstm.execute();
 
-            fw.write(idDirector + ";" + nomDirector + ";" + apeDirector + ";" + fnDirector + ";" + nacDirector + ";" + oscDirector + ";" + goyDirector + "\n;");
+            fw.write(idDirector + ";" + nomDirector + ";" + apeDirector + ";" + fnDirector + ";" + nacDirector + ";" + oscDirector + ";" + goyDirector + ";\n");
 
             fw.close();
 

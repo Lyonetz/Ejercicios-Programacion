@@ -51,7 +51,7 @@ public class NewActor extends JFrame {
 
             pstm.execute();
 
-            fw.write(idActor + ";" + nomActor + ";" + apeActor + ";" + fnActor + ";" + nacActor + ";" + genActor + ";" + cachActor + "\n;");
+            fw.write(idActor + ";" + nomActor + ";" + apeActor + ";" + fnActor + ";" + nacActor + ";" + genActor + ";" + cachActor + ";\n");
 
             fw.close();
 
