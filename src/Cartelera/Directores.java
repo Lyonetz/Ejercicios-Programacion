@@ -135,7 +135,8 @@ public class Directores extends JFrame {
 
         try {
             Statement stm = co.createStatement();
-            FileWriter fw = new FileWriter("/home/mingle/Downloads/Telegram Desktop/carga_directores.txt",false);
+            //FileWriter fw = new FileWriter("/home/mingle/Downloads/Telegram Desktop/carga_directores.txt",false);
+            FileWriter fw = new FileWriter("/home/carlos/Documents/FP/Base de Datos/Cartelera/carga_directores.txt",false);
 
             String query = "DELETE FROM directores WHERE dir_id = " + directores.get(seleccion).getId();
 

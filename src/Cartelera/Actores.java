@@ -156,21 +156,16 @@ public class Actores extends JFrame {
         try {
             Statement stm = co.createStatement();
             //FileWriter fw = new FileWriter("/home/mingle/Downloads/Telegram Desktop/carga_actores.txt",false);
-            FileWriter fw = new FileWriter("/home/carlos/Documents/FP/Base de Datos/carga_directores.txt",true);
+            FileWriter fw = new FileWriter("/home/carlos/Documents/FP/Base de Datos/Cartelera/carga_actores.txt",false);
 
-            if(seleccion == -1){
-                this.setSize(450,300);
-                errorMessage.setText("Seleccione el actor que desea borrar.");
-            } else {
-                String query = "DELETE FROM actores WHERE act_id = " + actores.get(seleccion).getId();
+            String query = "DELETE FROM actores WHERE act_id = " + actores.get(seleccion).getId();
 
-                stm.execute(query);
+            stm.execute(query);
 
-                actores.remove(seleccion);
+            actores.remove(seleccion);
 
-                for(Actor actor: actores) {
-                    fw.write(actor.getId() + ";" + actor.getNombre() + ";" + actor.getApellido() + ";" + actor.getFnac() + ";" + actor.getNac() + ";" + actor.getGen() + ";" + actor.getCache() + ";\n" );
-                }
+            for(Actor actor: actores) {
+                fw.write(actor.getId() + ";" + actor.getNombre() + ";" + actor.getApellido() + ";" + actor.getFnac() + ";" + actor.getNac() + ";" + actor.getGen() + ";" + actor.getCache() + ";\n");
             }
 
             fw.close();
@@ -183,7 +178,6 @@ public class Actores extends JFrame {
         cargarActores();
         cargarLista();
     }
-
 
     private void listaActoresValueChanged(ListSelectionEvent e) {
         if (!listaActores.isSelectionEmpty())

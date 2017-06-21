@@ -100,7 +100,7 @@ public class NewActor extends JFrame {
 
             if(rs.next()) {
                 int numAct = rs.getInt(1);
-                tfID.setText(String.valueOf(numAct+1));
+                tfID.setText(String.valueOf(numAct));
             }
         } catch(SQLException e) {
             e.printStackTrace();

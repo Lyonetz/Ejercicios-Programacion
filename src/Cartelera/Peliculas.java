@@ -115,7 +115,8 @@ public class Peliculas extends JFrame {
 
         try {
             Statement stm = co.createStatement();
-            FileWriter fw = new FileWriter("/home/mingle/Downloads/Telegram Desktop/carga_peliculas.txt",false);
+            //FileWriter fw = new FileWriter("/home/mingle/Downloads/Telegram Desktop/carga_peliculas.txt",false);
+            FileWriter fw = new FileWriter("/home/carlos/Documents/FP/Base de Datos/Cartelera/carga_peliculas.txt",false);
 
             String query = "DELETE FROM peliculas WHERE pel_tit = '" + peliculas.get(seleccion).getTitulo() + "' AND pel_agno = '" + peliculas.get(seleccion).getAgno() + "'";
 

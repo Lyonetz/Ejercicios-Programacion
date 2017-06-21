@@ -101,7 +101,7 @@ public class NewDirector extends JFrame {
 
             if(rs.next()) {
                 int numDir = rs.getInt(1);
-                tfID.setText(String.valueOf(numDir+1));
+                tfID.setText(String.valueOf(numDir));
             }
         } catch(SQLException e) {
             e.printStackTrace();
