@@ -5,9 +5,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-/*Listar el contenido de un directorio formateado, mostrando información de cada elemento. Mostrar también el tamaño total del
-* directorio en Kb (la suma total de los directorios que forman el directorio) */
-
 public class ListadorFicheros {
     static long tamTotal = 0;
 
